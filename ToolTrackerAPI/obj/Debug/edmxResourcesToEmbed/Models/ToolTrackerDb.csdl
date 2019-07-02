@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ToolRentalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Rental">
+    <Key>
+      <PropertyRef Name="RentalId" />
+    </Key>
+    <Property Name="RentalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="DateRented" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateReturned" Type="DateTime" Precision="3" />
+    <Property Name="ToolId" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tool">
+    <Key>
+      <PropertyRef Name="ToolId" />
+    </Key>
+    <Property Name="ToolId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Brand" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Available" Type="Int32" Nullable="false" />
+    <Property Name="AssetNum" Type="String" Nullable="false" />
+    <Property Name="Comment" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="ToolRentalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Rentals" EntityType="Self.Rental" />
+    <EntitySet Name="Tools" EntityType="Self.Tool" />
+    <EntitySet Name="ToolHistories" EntityType="ToolRentalModel.ToolHistory" />
+    <EntitySet Name="Workshops" EntityType="ToolRentalModel.Workshop" />
+  </EntityContainer>
+  <EntityType Name="ToolHistory">
+    <Key>
+      <PropertyRef Name="ToolHistoryId" />
+    </Key>
+    <Property Name="ToolHistoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" Nullable="false" />
+    <Property Name="Borrowed" Type="DateTime" Nullable="false" />
+    <Property Name="Returned" Type="DateTime" Nullable="true" />
+    <Property Name="AssetNum" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Workshop">
+    <Key>
+      <PropertyRef Name="WorkshopId" />
+    </Key>
+    <Property Name="WorkshopId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkshopName" Type="String" Nullable="false" />
+  </EntityType>
+</Schema>

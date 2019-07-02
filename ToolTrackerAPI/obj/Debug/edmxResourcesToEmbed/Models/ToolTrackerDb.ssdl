@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ToolRentalModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ToolRentalModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="ToolRentalModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Rentals" EntityType="ToolRentalModel.Store.Rentals" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tools" EntityType="ToolRentalModel.Store.Tools" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ToolHistories" EntityType="ToolRentalModel.Store.ToolHistories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Workshops" EntityType="ToolRentalModel.Store.Workshops" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CustomerPhone" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Rentals">
+    <Key>
+      <PropertyRef Name="RentalId" />
+    </Key>
+    <Property Name="RentalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="DateRented" Type="datetime" Nullable="false" />
+    <Property Name="DateReturned" Type="datetime" Nullable="true" />
+    <Property Name="ToolId" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tools">
+    <Key>
+      <PropertyRef Name="ToolId" />
+    </Key>
+    <Property Name="ToolId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Brand" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Notes" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Available" Type="int" Nullable="false" />
+    <Property Name="AssetNum" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ToolHistories">
+    <Key>
+      <PropertyRef Name="ToolHistoryId" />
+    </Key>
+    <Property Name="ToolHistoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Borrowed" Type="datetime" Nullable="false" />
+    <Property Name="Returned" Type="datetime" Nullable="true" />
+    <Property Name="AssetNum" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Workshops">
+    <Key>
+      <PropertyRef Name="WorkshopId" />
+    </Key>
+    <Property Name="WorkshopId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WorkshopName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+</Schema>
